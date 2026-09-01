@@ -1,0 +1,126 @@
+import java.util.Scanner;
+
+public class SmartTrafficViolationAnalyzer {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Input details
+        System.out.print("Enter vehicle number: ");
+        String vehicleNumber = sc.nextLine();
+
+        System.out.print("Enter vehicle speed (km/h): ");
+        double speed = sc.nextDouble();
+
+        System.out.print("Enter speed limit (km/h): ");
+        double speedLimit = sc.nextDouble();
+
+        System.out.print("Enter driver age: ");
+        int age = sc.nextInt();
+
+        System.out.print("Is the driver wearing a helmet? (true/false): ");
+        boolean helmet = sc.nextBoolean();
+
+        System.out.print("Is the driver wearing a seatbelt? (true/false): ");
+        boolean seatbelt = sc.nextBoolean();
+
+        System.out.print("Does the driver have a valid license? (true/false): ");
+        boolean license = sc.nextBoolean();
+
+        System.out.print("Is it an emergency vehicle? (true/false): ");
+        boolean emergencyVehicle = sc.nextBoolean();
+
+        // Fine amounts
+        int speedingFine = 1000;
+        int ageFine = 500;
+        int helmetFine = 500;
+        int seatbeltFine = 500;
+        int licenseFine = 2000;
+
+        int totalFine = 0;
+        int violationCount = 0;
+
+        // Check violations
+        boolean speedingViolation =
+                speed > speedLimit && !emergencyVehicle;
+
+        boolean ageViolation = age < 18;
+
+        boolean helmetViolation = !helmet;
+
+        boolean seatbeltViolation = !seatbelt;
+
+        boolean licenseViolation = !license;
+
+        // Calculate total fine
+        if (speedingViolation) {
+            totalFine += speedingFine;
+            violationCount++;
+        }
+
+        if (ageViolation) {
+            totalFine += ageFine;
+            violationCount++;
+        }
+
+        if (helmetViolation) {
+            totalFine += helmetFine;
+            violationCount++;
+        }
+
+        if (seatbeltViolation) {
+            totalFine += seatbeltFine;
+            violationCount++;
+        }
+
+        if (licenseViolation) {
+            totalFine += licenseFine;
+            violationCount++;
+        }
+
+        // Final report
+        System.out.println("\n=================================");
+        System.out.println("   SMART TRAFFIC VIOLATION REPORT");
+        System.out.println("=================================");
+
+        System.out.println("Vehicle Number : " + vehicleNumber);
+        System.out.println("Vehicle Speed  : " + speed + " km/h");
+        System.out.println("Speed Limit    : " + speedLimit + " km/h");
+        System.out.println("Driver Age     : " + age);
+        System.out.println("Emergency Vehicle : " + emergencyVehicle);
+
+        System.out.println("\n--- Violation Details ---");
+
+        if (speedingViolation) {
+            System.out.println("1. Overspeeding - Fine: Rs. " + speedingFine);
+        }
+
+        if (ageViolation) {
+            System.out.println("2. Driver is underage - Fine: Rs. " + ageFine);
+        }
+
+        if (helmetViolation) {
+            System.out.println("3. No helmet - Fine: Rs. " + helmetFine);
+        }
+
+        if (seatbeltViolation) {
+            System.out.println("4. No seatbelt - Fine: Rs. " + seatbeltFine);
+        }
+
+        if (licenseViolation) {
+            System.out.println("5. No valid license - Fine: Rs. " + licenseFine);
+        }
+
+        if (violationCount == 0) {
+            System.out.println("No traffic violations detected.");
+            System.out.println("Vehicle is compliant with the rules.");
+        } else {
+            System.out.println("\nTotal Violations : " + violationCount);
+            System.out.println("Total Fine       : Rs. " + totalFine);
+        }
+
+        System.out.println("=================================");
+
+        sc.close();
+    }
+}

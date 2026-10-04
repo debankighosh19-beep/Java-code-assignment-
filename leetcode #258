@@ -1,18 +1,27 @@
-class Solution {
-    public int addDigits(int num) {
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int num = sc.nextInt();
 
         while (num >= 10) {
 
             int sum = 0;
 
             while (num > 0) {
-                sum = sum + (num % 10);
+                int digit = num % 10;
+                sum = sum + digit;
                 num = num / 10;
             }
 
             num = sum;
         }
 
-        return num;
+        System.out.println(num);
+
+        sc.close();
     }
 }
